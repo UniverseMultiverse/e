@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Counter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+        #fps-counter {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #000000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div id="fps-counter"></div>
+
+    <script>
+        // Function to calculate FPS
+        function calculateFPS() {
+            var now = performance.now();
+            while (times.length > 0 && times[0] <= now - 1000) {
+                times.shift();
+            }
+            times.push(now);
+            return times.length;
+        }
+
+        // Function to update FPS counter
+        function updateFPSCounter() {
+            var fps = calculateFPS();
+            fpsCounterElement.textContent = "FPS: " + fps;
+            setTimeout(updateFPSCounter, updateInterval); // Set the update interval
+        }
+
+        // Array to store timestamps for FPS calculation
+        var times = [];
+
+        // Create FPS counter element
+        var fpsCounterElement = document.getElementById("fps-counter");
+
+        // Set the initial update interval (in milliseconds)
+        var updateInterval = 0; // Default: 1 second
+
+        // Start updating FPS counter
+        updateFPSCounter();
+    </script>
+</body>
+</html>
